@@ -24,6 +24,24 @@ class Country_ModelTest extends PHPUnit_Framework_TestCase {
 		// Use invalid country
 		$invalid = Country_Model::get_country_by_name('Nairobi');
 		$this->assertNull($invalid);
+
 	}
+    public function testGetCountryByCode()
+    {
+        $valid = Country_Model::get_country_by_code('KE');
+        $this->assertEquals(TRUE, $valid instanceof Country_Model, sprintf('Invalid country object type (%s) returned', get_class($valid)));
+        $this->assertGreaterThanOrEqual(1, $valid->id);
+        $invalid = Country_Model::get_country_by_code('17');
+        $this->assertNull($invalid);
+    }
+
+    public function testGetCountryByCode2()
+    {
+        $valid = Country_Model::get_country_by_code('CA');
+        $this->assertEquals(TRUE, $valid instanceof Country_Model, sprintf('Invalid country object type (%s) returned', get_class($valid)));
+        $this->assertGreaterThanOrEqual(1, $valid->id);
+        $invalid = Country_Model::get_country_by_code('17');
+        $this->assertNull($invalid);
+    }
 }
 ?>
